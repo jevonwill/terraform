@@ -129,10 +129,10 @@ resource "azurerm_network_interface" "public-nic" {
 
 #Create linux vm
 resource "azurerm_linux_virtual_machine" "vm-1" {
-    name = "example-machine"
+    name = "vm-1"
     resource_group_name = azurerm_resource_group.publix-demo-rg.name
     location = azurerm_resource_group.publix-demo-rg.location
-    size = "Standard_B1"
+    size = "Standard_B1ls"
     admin_username = "adminuser"
     network_interface_ids = [
         azurerm_network_interface.public-nic.id
