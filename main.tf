@@ -93,6 +93,6 @@ resource "azurerm_network_security_rule" "ssh-access" {
 
 #Associate security groups
 resource "azurerm_subnet_network_security_group_association" "public-sga-1" {
-  subnet_id                 = azurerm_subnet.publix.public-1.id
+  subnet_id                 = azurerm_subnet.public-1.id
   network_security_group_id = azurerm_network_security_group.public-access-sg.id
 }
