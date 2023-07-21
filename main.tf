@@ -145,7 +145,7 @@ resource "azurerm_linux_virtual_machine" "vm-1" {
 
     os_disk {
         caching = "ReadWrite"
-        storage_account_type = "StandardLRS"
+        storage_account_type = "Standard_LRS"
     }
 
     source_image_reference {
