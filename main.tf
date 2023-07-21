@@ -99,7 +99,7 @@ resource "azurerm_subnet_network_security_group_association" "public-sga-1" {
 
 #Create Public IP
 resource "azurerm_public_ip" "vm-1-ip" {
-  name                = "public-ip-1"
+  name                = "vm-1-ip"
   resource_group_name = azurerm_resource_group.publix-demo-rg.name
   location            = azurerm_resource_group.publix-demo-rg.location
   allocation_method   = "Dynamic"
@@ -110,15 +110,19 @@ resource "azurerm_public_ip" "vm-1-ip" {
 }
 
 #Create network interface
-#resource "azurerm_network_interface" "public-nic-1" {
- # name                = "public-nic-1"
-  #location            = azurerm_resource_group.publix-demo-rg.location
-  #resource_group_name = azurerm_resource_group.publix-demo-rg.name
+resource "azurerm_network_interface" "public-nic" {
+  name                = "public-nic"
+  location            = azurerm_resource_group.publix-demo-rg.location
+  resource_group_name = azurerm_resource_group.publix-demo-rg.name
 
-#  ip_configuration {
- #   name                          = "internal"
-  #  subnet_id                     = azurerm_subnet.public-1.id
-   # private_ip_address_allocation = "Dynamic"
-    #public_ip_address_id = azure_public_ip.vm-1-ip.id
-  #}
-#}
+  ip_configuration {
+    name                          = "internal"
+    subnet_id                     = azurerm_subnet.public-1.id
+    private_ip_address_allocation = "Dynamic"
+    public_ip_address_id = azure_public_ip.vm-1-ip.id
+  }
+
+  tags = {
+    environment = "demo"
+  }
+}
