@@ -96,3 +96,15 @@ resource "azurerm_subnet_network_security_group_association" "public-sga-1" {
   subnet_id                 = azurerm_subnet.public-1.id
   network_security_group_id = azurerm_network_security_group.public-access-sg.id
 }
+
+#Create Public IP
+resource "azurerm_public_ip" "vm-1-ip" {
+  name                = "public-ip-1"
+  resource_group_name = azurerm_resource_group.publix-demo-rg.name
+  location            = azurerm_resource_group.publix-demo-rg.location
+  allocation_method   = "Dynamic"
+
+  tags = {
+    environment = "demo"
+  }
+}
