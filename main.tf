@@ -65,31 +65,19 @@ resource "azurerm_network_security_group" "public-access-sg" {
 #Create network security rules
 resource "azurerm_network_security_rule" "public-access-rule" {
   name                        = "inbound-port-80"
-  priority                    = 101
+  priority                    = 100
   direction                   = "Inbound"
   access                      = "Allow"
   protocol                    = "Tcp"
-  source_port_range           = "80"
-  destination_port_range      = "80"
+  source_port_range           = "*"
+  destination_port_range      = "*"
   source_address_prefix       = "*"
   destination_address_prefix  = "*"
   resource_group_name         = azurerm_resource_group.publix-demo-rg.name
   network_security_group_name = azurerm_network_security_group.public-access-sg.name
 }
 
-resource "azurerm_network_security_rule" "ssh-access" {
-  name                        = "ssh-access"
-  priority                    = 100
-  direction                   = "Inbound"
-  access                      = "Allow"
-  protocol                    = "Tcp"
-  source_port_range           = "22"
-  destination_port_range      = "22"
-  source_address_prefix       = "*"
-  destination_address_prefix  = "*"
-  resource_group_name         = azurerm_resource_group.publix-demo-rg.name
-  network_security_group_name = azurerm_network_security_group.public-access-sg.name
-}
+
 
 #Associate security groups
 resource "azurerm_subnet_network_security_group_association" "public-sga-1" {
