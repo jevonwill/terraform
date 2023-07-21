@@ -15,6 +15,6 @@ provider "azurerm" {
 #Create Publix Demo ResourceGroup
 resource "azurerm_resource_group" "publix-demo" {
     name = "publix-demo"
-    location = "US East"
+    location = "East US"
 }
 
