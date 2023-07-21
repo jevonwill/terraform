@@ -16,5 +16,8 @@ provider "azurerm" {
 resource "azurerm_resource_group" "publix-demo" {
     name = "publix-demo"
     location = "East US"
+    tags = {
+        environment = "dev"
+    }
 }
 
