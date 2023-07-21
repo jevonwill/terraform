@@ -9,7 +9,7 @@ terraform {
 
 #Configure Azure Provider
 provider "azurerm" {
-    feature {}
+    features {}
 }
 
 #Create Publix Demo ResourceGroup
