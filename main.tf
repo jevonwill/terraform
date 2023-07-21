@@ -65,7 +65,7 @@ resource "azurerm_network_security_group" "public-access-sg" {
 #Create network security rules
 resource "azurerm_network_security_rule" "public-access-rule" {
   name                        = "inbound-port-80"
-  priority                    = 100
+  priority                    = 99
   direction                   = "Inbound"
   access                      = "Allow"
   protocol                    = "Tcp"
