@@ -48,3 +48,45 @@ resource "azurerm_subnet" "private-1" {
     virtual_network_name = azurerm_virtual_network.publix-demo-network.name
     address_prexfixes = ["10.11.2.0/24"]
 }
+
+#Create network security groups
+
+resource "azurerm_network_security_group" "public-access-sg" {
+    name = "public-access-sg"
+    location = azurerm_resource_group.publix-demo-rg.location
+    resource_group_name = azurerm_resource_group.publix-demo-rg.name
+
+   
+    tags = {
+        environment = "demo"
+  }
+}
+
+#Create network security rules
+resource "azurerm_network_security_rule" "public-access-rule" {
+  name                        = "inbound-port-80"
+  priority                    = 100
+  direction                   = "Inbound"
+  access                      = "Allow"
+  protocol                    = "Tcp"
+  source_port_range           = "80"
+  destination_port_range      = "80"
+  source_address_prefix       = "*"
+  destination_address_prefix  = "*"
+  resource_group_name         = azurerm_resource_group.publix-demo-rg.name
+  network_security_group_name = azurerm_network_security_group.public-access-sg.name
+}
+
+resource "azurerm_network_security_rule" "ssh-access" {
+  name                        = "ssh-access"
+  priority                    = 100
+  direction                   = "Inbound"
+  access                      = "Allow"
+  protocol                    = "Tcp"
+  source_port_range           = "22"
+  destination_port_range      = "22"
+  source_address_prefix       = "*"
+  destination_address_prefix  = "*"
+  resource_group_name         = azurerm_resource_group.publix-demo-rg.name
+  network_security_group_name = azurerm_network_security_group.public-access-sg.name
+}
