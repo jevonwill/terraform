@@ -119,7 +119,7 @@ resource "azurerm_network_interface" "public-nic" {
     name                          = "internal"
     subnet_id                     = azurerm_subnet.public-1.id
     private_ip_address_allocation = "Dynamic"
-    public_ip_address_id = azure_public_ip.vm-1-ip.id
+    public_ip_address_id = azurerm_public_ip.vm-1-ip.id
   }
 
   tags = {
